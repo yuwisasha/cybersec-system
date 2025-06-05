@@ -4,6 +4,7 @@ from .incident import (
     IncidentStatusUpdateRequest,
     IncidentListItem,
     RecommendationView,
+    EventLogView,
 )
 from .recommendation import RecommendationStatusUpdateRequest
 from .event import (
@@ -22,4 +23,5 @@ __all__ = (
     "IncidentListItem",
     "RecommendationView",
     "TokenResponse",
+    "EventLogView",
 )

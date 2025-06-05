@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-DATABASE_URL = "postgresql://user:password@localhost:5432/cybersec_db"
+from app.core.config import settings
 
-engine = create_engine(DATABASE_URL, echo=False)
+
+engine = create_engine(settings.database_url, echo=False)
 SessionLocal = scoped_session(sessionmaker(bind=engine))

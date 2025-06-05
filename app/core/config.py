@@ -12,8 +12,5 @@ class Settings(BaseSettings):
     telegram_bot_token: str
     telegram_chat_id: str
 
-    class Config:
-        env_file = ".env"
-
 
 settings = Settings()
