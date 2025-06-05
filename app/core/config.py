@@ -9,6 +9,11 @@ class Settings(BaseSettings):
     app_host: str = Field(default="127.0.0.1", alias="APP_HOST")
     app_port: int = Field(default=8000, alias="APP_PORT")
     debug: bool = Field(default=False, alias="DEBUG")
+    telegram_bot_token: str
+    telegram_chat_id: str
+
+    class Config:
+        env_file = ".env"
 
 
 settings = Settings()

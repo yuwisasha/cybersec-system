@@ -10,7 +10,9 @@ from app.models import (
     IncidentDetail,
     IncidentRecommendation,
     EventSource,
+    SeverityLevel,
 )
+from app.core.telegram import send_telegram_alert
 
 
 def apply_reaction(event_log: EventLog, db: Session):
@@ -68,3 +70,14 @@ def apply_reaction(event_log: EventLog, db: Session):
         f"Rule #{rule.id} triggered for event #{event_log.event_id}"
         f", incident #{incident.id} created"
     )
+
+    severity = (
+        db.query(SeverityLevel).filter_by(id=event_log.severity_id).first()
+    )
+    if severity and severity.name.lower() == "критический":
+        send_telegram_alert(
+            f"⚠️ <b>Критический инцидент #{incident.id}</b>\n"
+            f"🧾 {event_log.message}\n"
+            f"📍 Источник: {event_log.source_ip}\n"
+            f"👤 Пользователь: {event_log.user_login}"
+        )
