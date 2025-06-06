@@ -10,6 +10,7 @@ if TYPE_CHECKING:
 
 
 class Event(Base):
+    """Событие."""
     __tablename__ = "events"
 
     id: Mapped[int] = mapped_column(primary_key=True)

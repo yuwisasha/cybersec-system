@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from datetime import date
+from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -11,11 +11,12 @@ if TYPE_CHECKING:
 
 
 class Recommendation(Base):
+    """Рекомендация."""
     __tablename__ = "recommendations"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     content: Mapped[str] = mapped_column()
-    created_at: Mapped[date] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column()
 
     assignments: Mapped[list["IncidentRecommendation"]] = relationship(
         back_populates="recommendation"

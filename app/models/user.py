@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 
 class User(Base):
+    """Пользователь."""
     __tablename__ = "users"
 
     login: Mapped[str] = mapped_column(primary_key=True)

@@ -22,22 +22,41 @@ services:
     volumes:
       - ./app:/app/app
 
-  alembic:
-    build:
-      context: .
-    container_name: cybersec-alembic
-    depends_on:
-      - db
-    command: uv run alembic upgrade head
-    env_file:
-      - .env
+  # alembic:
+  #   build:
+  #     context: .
+  #   container_name: cybersec-alembic
+  #   depends_on:
+  #     - db
+  #   command: uv run alembic upgrade head
+  #   env_file:
+  #     - .env
+
+  loki:
+    image: grafana/loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki:/etc/loki
+
+  promtail:
+    image: grafana/promtail
+    volumes:
+      - ./promtail:/etc/promtail
+      - /var/log:/var/log:ro
+    command: -config.file=/etc/promtail/promtail-config.yaml
 
   grafana:
-    image: grafana/grafana-enterprise
-    container_name: grafana
-    restart: unless-stopped
+    image: grafana/grafana
     ports:
-     - '3000:3000'
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
 
 volumes:
   postgres_data:
+  grafana_data:

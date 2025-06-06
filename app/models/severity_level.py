@@ -10,6 +10,8 @@ if TYPE_CHECKING:
 
 
 class SeverityLevel(Base):
+    """Уровень критичности."""
+
     __tablename__ = "severity_levels"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -17,4 +19,6 @@ class SeverityLevel(Base):
     explanation: Mapped[str | None] = mapped_column(nullable=True)
 
     logs: Mapped[list["EventLog"]] = relationship(back_populates="severity")
-    rules: Mapped[list["ReactionRule"]] = relationship(back_populates="severity")
+    rules: Mapped[list["ReactionRule"]] = relationship(
+        back_populates="severity"
+    )

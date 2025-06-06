@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 
 class EventSource(Base):
+    """Источник события."""
     __tablename__ = "event_sources"
 
     ip_address: Mapped[str] = mapped_column(primary_key=True)

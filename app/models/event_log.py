@@ -14,6 +14,7 @@ if TYPE_CHECKING:
 
 
 class EventLog(Base):
+    """Журнал событий."""
     __tablename__ = "event_logs"
 
     id: Mapped[int] = mapped_column(primary_key=True)

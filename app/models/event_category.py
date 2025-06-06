@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 
 class EventCategory(Base):
+    """Категория события."""
     __tablename__ = "event_categories"
 
     id: Mapped[int] = mapped_column(primary_key=True)

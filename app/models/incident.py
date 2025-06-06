@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 
 
 class Incident(Base):
+    """Инцидент."""
     __tablename__ = "incidents"
 
     id: Mapped[int] = mapped_column(primary_key=True)

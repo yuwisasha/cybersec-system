@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from datetime import date
+from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 
 class IncidentRecommendation(Base):
+    """Назначение рекомендации."""
     __tablename__ = "incident_recommendations"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -21,7 +22,7 @@ class IncidentRecommendation(Base):
     recommendation_id: Mapped[int] = mapped_column(
         ForeignKey("recommendations.id"), nullable=False
     )
-    assigned_at: Mapped[date] = mapped_column()
+    assigned_at: Mapped[datetime] = mapped_column()
     status: Mapped[str] = mapped_column()
 
     incident: Mapped[list["Incident"]] = relationship(

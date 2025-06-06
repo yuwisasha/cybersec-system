@@ -2,6 +2,7 @@ from typing import Annotated
 from datetime import date
 
 from fastapi import APIRouter, Depends, Query
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
 from app.schemas import (
@@ -13,6 +14,7 @@ from app.services import (
     get_incident_detail,
     update_incident_status,
     get_incident_list,
+    generate_incident_report,
 )
 from app.deps import get_db
 from app.core.auth import require_admin
@@ -61,4 +63,20 @@ def list_incidents(
         search=search,
         from_date=from_date,
         to_date=to_date,
+    )
+
+
+@router.get(
+    "/export",
+    response_class=StreamingResponse,
+    dependencies=[Depends(require_admin)],
+)
+def export_incidents(db: Session = Depends(get_db)):
+    file = generate_incident_report(db)
+    return StreamingResponse(
+        file,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={
+            "Content-Disposition": "attachment; filename=incident_report.xlsx"
+        },
     )

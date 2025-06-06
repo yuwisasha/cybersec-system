@@ -11,6 +11,7 @@ from .event_service import (
     get_event_list,
     get_event_detail,
 )
+from .report_service import generate_incident_report
 
 __all__ = (
     "get_incident_detail",
@@ -20,4 +21,5 @@ __all__ = (
     "get_event_list",
     "get_event_detail",
     "get_incident_list",
+    "generate_incident_report",
 )

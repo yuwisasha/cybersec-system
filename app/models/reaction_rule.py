@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 
 
 class ReactionRule(Base):
+    """Правило реагирования."""
     __tablename__ = "reaction_rules"
 
     id: Mapped[int] = mapped_column(primary_key=True)
