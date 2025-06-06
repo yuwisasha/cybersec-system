@@ -28,3 +28,6 @@ class ReactionRule(Base):
     recommendation: Mapped[list["Recommendation"]] = relationship(
         "Recommendation", back_populates="rules"
     )
+
+    def __str__(self):
+        return f"{self.severity} {self.recommendation}"

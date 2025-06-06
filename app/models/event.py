@@ -14,7 +14,10 @@ class Event(Base):
     __tablename__ = "events"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    created_at: Mapped[datetime] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column(default=datetime.now())
     description: Mapped[str] = mapped_column()
 
     logs: Mapped[list["EventLog"]] = relationship(back_populates="event")
+
+    def __str__(self):
+        return f"{self.created_at} {self.description}"

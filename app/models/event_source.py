@@ -18,3 +18,6 @@ class EventSource(Base):
     type: Mapped[str] = mapped_column()
 
     logs: Mapped[list["EventLog"]] = relationship(back_populates="source")
+
+    def __str__(self):
+        return f"{self.ip_address} {self.name} {self.type}"

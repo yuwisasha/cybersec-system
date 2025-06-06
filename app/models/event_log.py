@@ -46,3 +46,6 @@ class EventLog(Base):
     source: Mapped[list["EventSource"]] = relationship(
         "EventSource", back_populates="logs"
     )
+
+    def __str__(self):
+        return f"{self.category_id} {self.message}"

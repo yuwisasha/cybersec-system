@@ -22,3 +22,6 @@ class SeverityLevel(Base):
     rules: Mapped[list["ReactionRule"]] = relationship(
         back_populates="severity"
     )
+
+    def __str__(self):
+        return f"{self.name} {self.explanation}"

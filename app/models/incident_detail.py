@@ -21,9 +21,12 @@ class IncidentDetail(Base):
     event_id: Mapped[int] = mapped_column(
         ForeignKey("events.id"), nullable=False
     )
-    added_at: Mapped[datetime] = mapped_column()
+    added_at: Mapped[datetime] = mapped_column(default=datetime.now())
     comment: Mapped[str | None] = mapped_column(nullable=True)
 
     incident: Mapped[list["Incident"]] = relationship(
         "Incident", back_populates="breakdowns"
     )
+
+    def __str__(self):
+        return f"{self.added_at} {self.comment}"

@@ -16,7 +16,7 @@ class Recommendation(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     content: Mapped[str] = mapped_column()
-    created_at: Mapped[datetime] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column(default=datetime.now())
 
     assignments: Mapped[list["IncidentRecommendation"]] = relationship(
         back_populates="recommendation"
@@ -24,3 +24,6 @@ class Recommendation(Base):
     rules: Mapped[list["ReactionRule"]] = relationship(
         back_populates="recommendation"
     )
+
+    def __str__(self):
+        return f"{self.created_at} {self.content}"

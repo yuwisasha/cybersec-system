@@ -22,7 +22,7 @@ class IncidentRecommendation(Base):
     recommendation_id: Mapped[int] = mapped_column(
         ForeignKey("recommendations.id"), nullable=False
     )
-    assigned_at: Mapped[datetime] = mapped_column()
+    assigned_at: Mapped[datetime] = mapped_column(default=datetime.now())
     status: Mapped[str] = mapped_column()
 
     incident: Mapped[list["Incident"]] = relationship(
@@ -31,3 +31,6 @@ class IncidentRecommendation(Base):
     recommendation: Mapped[list["Recommendation"]] = relationship(
         "Recommendation", back_populates="assignments"
     )
+
+    def __str__(self):
+        return f"{self.status} {self.incident} {self.recommendation}"

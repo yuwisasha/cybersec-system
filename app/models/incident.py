@@ -15,7 +15,7 @@ class Incident(Base):
     __tablename__ = "incidents"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    created_at: Mapped[datetime] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column(default=datetime.now())
     description: Mapped[str] = mapped_column()
     status: Mapped[str] = mapped_column()
 
@@ -25,3 +25,6 @@ class Incident(Base):
     recommendations: Mapped[list["IncidentRecommendation"]] = relationship(
         back_populates="incident"
     )
+
+    def __str__(self):
+        return f"{self.created_at} {self.description} {self.status}"

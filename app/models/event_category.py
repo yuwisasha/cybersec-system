@@ -17,3 +17,6 @@ class EventCategory(Base):
     description: Mapped[str | None] = mapped_column(nullable=True)
 
     logs: Mapped[list["EventLog"]] = relationship(back_populates="category")
+
+    def __str__(self):
+        return f"{self.name}"

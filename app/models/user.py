@@ -10,6 +10,7 @@ if TYPE_CHECKING:
 
 class User(Base):
     """Пользователь."""
+
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -21,3 +22,9 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column()
 
     events: Mapped[list["EventLog"]] = relationship(back_populates="user")
+
+    def __str__(self):
+        return (
+            f"{self.login} {self.last_name} "
+            f"{self.first_name} {self.middle_name}"
+        )

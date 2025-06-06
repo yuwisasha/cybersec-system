@@ -4,4 +4,4 @@ from app.models import User
 
 
 class UserAdmin(ModelView, model=User):
-    column_list = [User.login, User.last_name]
+    column_list = "__all__"

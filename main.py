@@ -12,6 +12,8 @@ from app.routers import (
 )
 from app.admin import (
     UserAdmin,
+    EventLogAdmin,
+    IncidentRecommendationAdmin,
 )
 
 app = FastAPI(debug=settings.debug)
@@ -24,3 +26,5 @@ app.include_router(events_router)
 app.include_router(auth_router)
 
 admin.add_model_view(UserAdmin)
+admin.add_model_view(EventLogAdmin)
+admin.add_model_view(IncidentRecommendationAdmin)
