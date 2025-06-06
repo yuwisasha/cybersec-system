@@ -12,7 +12,8 @@ class User(Base):
     """Пользователь."""
     __tablename__ = "users"
 
-    login: Mapped[str] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    login: Mapped[str] = mapped_column(unique=True)
     last_name: Mapped[str] = mapped_column()
     first_name: Mapped[str] = mapped_column()
     middle_name: Mapped[str | None] = mapped_column(nullable=True)

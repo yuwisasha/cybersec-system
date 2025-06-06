@@ -11,7 +11,7 @@ from .incident_detail import IncidentDetail
 from .recommendation import Recommendation
 from .incident_recommendation import IncidentRecommendation
 from .reaction_rule import ReactionRule
-from .event_incedent_detail import EventIncedentDetail
+from .event_incedent_detail import EventIncidentDetail
 
 __all__ = (
     "Base",
@@ -26,5 +26,5 @@ __all__ = (
     "Recommendation",
     "IncidentRecommendation",
     "ReactionRule",
-    "EventIncedentDetail",
+    "EventIncidentDetail",
 )

@@ -12,7 +12,8 @@ class EventSource(Base):
     """Источник события."""
     __tablename__ = "event_sources"
 
-    ip_address: Mapped[str] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(primary_key=True)
+    ip_address: Mapped[str] = mapped_column(unique=True)
     name: Mapped[str] = mapped_column()
     type: Mapped[str] = mapped_column()
 

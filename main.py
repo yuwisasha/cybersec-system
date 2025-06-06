@@ -1,5 +1,7 @@
 from fastapi import FastAPI
+from sqladmin import Admin
 
+from app.core.database import engine
 from app.core.config import settings
 from app.routers import (
     ingest_router,
@@ -8,11 +10,17 @@ from app.routers import (
     events_router,
     auth_router,
 )
+from app.admin import (
+    UserAdmin,
+)
 
 app = FastAPI(debug=settings.debug)
+admin = Admin(app, engine)
 
 app.include_router(ingest_router)
 app.include_router(incedents_router)
 app.include_router(recommendations_router)
 app.include_router(events_router)
 app.include_router(auth_router)
+
+admin.add_model_view(UserAdmin)

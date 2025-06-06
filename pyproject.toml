@@ -14,5 +14,6 @@ dependencies = [
     "psycopg[binary]>=3.2.9",
     "pydantic-settings>=2.9.1",
     "python-jose>=3.5.0",
+    "sqladmin>=0.20.1",
     "sqlalchemy>=2.0.41",
 ]
