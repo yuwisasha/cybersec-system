@@ -21,7 +21,7 @@ class EventLog(Base):
         ForeignKey("events.id"), nullable=False
     )
     user_login: Mapped[str] = mapped_column(
-        ForeignKey("users.login"), nullable=False
+        ForeignKey("users.login"), nullable=True,
     )
     category_id: Mapped[int] = mapped_column(
         ForeignKey("event_categories.id"), nullable=False

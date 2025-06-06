@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from datetime import date
+from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -14,7 +14,7 @@ class Incident(Base):
     __tablename__ = "incidents"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    created_at: Mapped[date] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column()
     description: Mapped[str] = mapped_column()
     status: Mapped[str] = mapped_column()
 
