@@ -33,4 +33,4 @@ class IncidentRecommendation(Base):
     )
 
     def __str__(self):
-        return f"{self.status} {self.incident} {self.recommendation}"
+        return f"#{self.id} {self.status} {self.assigned_at}"

@@ -19,5 +19,5 @@ def login(
     ):
         raise HTTPException(status_code=401, detail="Неверные учетные данные")
 
-    token = create_access_token(data={"sub": user.username})
+    token = create_access_token(data={"sub": user.login})
     return TokenResponse(access_token=token)

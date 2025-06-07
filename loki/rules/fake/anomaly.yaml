@@ -1,0 +1,12 @@
+groups:
+  - name: anomalies
+    rules:
+      - alert: BehavioralAnomaly
+        expr: count_over_time({job="systemd"} |= `unexpected behavior` [1m]) > 1
+        for: 1m
+        labels:
+          severity: high
+          category: anomaly
+          source_type: local
+        annotations:
+          summary: "Обнаружено нетипичное поведение системы"

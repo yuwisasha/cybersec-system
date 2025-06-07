@@ -14,6 +14,9 @@ from app.admin import (
     UserAdmin,
     EventLogAdmin,
     IncidentRecommendationAdmin,
+    IncidentAdmin,
+    ReactionRuleAdmin,
+    SeverityLevelAdmin,
 )
 
 app = FastAPI(debug=settings.debug)
@@ -28,3 +31,6 @@ app.include_router(auth_router)
 admin.add_model_view(UserAdmin)
 admin.add_model_view(EventLogAdmin)
 admin.add_model_view(IncidentRecommendationAdmin)
+admin.add_model_view(IncidentAdmin)
+admin.add_model_view(ReactionRuleAdmin)
+admin.add_model_view(SeverityLevelAdmin)

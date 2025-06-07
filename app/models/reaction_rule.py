@@ -30,4 +30,4 @@ class ReactionRule(Base):
     )
 
     def __str__(self):
-        return f"{self.severity} {self.recommendation}"
+        return f"Rule #{self.id}"

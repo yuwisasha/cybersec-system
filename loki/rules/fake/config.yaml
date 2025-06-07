@@ -1,0 +1,12 @@
+groups:
+  - name: config-change
+    rules:
+      - alert: SuspiciousConfigChanges
+        expr: count_over_time({job="systemd"} |= `sudo` or `visudo` [1m]) > 2
+        for: 1m
+        labels:
+          severity: high
+          category: config
+          source_type: server
+        annotations:
+          summary: "Обнаружены подозрительные изменения конфигурации"

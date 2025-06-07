@@ -1,4 +1,6 @@
 from datetime import date
+from collections import Counter
+
 from fastapi import HTTPException
 
 from sqlalchemy import func
@@ -130,3 +132,25 @@ def get_incident_list(
     rows = query.order_by(Incident.created_at.desc()).all()
 
     return [IncidentListItem.model_validate(row) for row in rows]
+
+
+def generate_incident_description(events: list["Event"]) -> str:
+    if not events:
+        return "Инцидент без событий"
+
+    # Частые категории
+    categories = [e.category.name for e in events]
+    top_category = Counter(categories).most_common(1)[0][0]
+
+    # Частое сообщение
+    messages = [e.description for e in events]
+    top_message = Counter(messages).most_common(1)[0][0]
+
+    # Диапазон времени
+    times = [e.created_at for e in events]
+    start, end = min(times), max(times)
+
+    return (
+        f"События категории '{top_category}' в период с "
+        f"{start:%d.%m %H:%M} по {end:%d.%m %H:%M}: {top_message}"
+    )

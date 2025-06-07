@@ -14,6 +14,7 @@ from app.models import (
     Recommendation,
 )
 from app.core.telegram import send_telegram_alert
+from app.services.incident_service import generate_incident_description
 
 
 def apply_reaction(event_log: EventLog, db: Session):
@@ -61,7 +62,7 @@ def apply_reaction(event_log: EventLog, db: Session):
     else:
         incident = Incident(
             created_at=datetime.now().date(),
-            description=f"Инцидент по событию #{event_log.event_id}",
+            description=generate_incident_description([event_log.event]),
             status="открыт",
         )
         db.add(incident)
@@ -97,7 +98,7 @@ def apply_reaction(event_log: EventLog, db: Session):
     recomnendation = (
         db.query(Recommendation).filter_by(id=rule.recommendation_id).first()
     )
-    if severity and severity.name.lower() == "критический":
+    if severity and severity.name.lower() == "Критический":
         send_telegram_alert(
             f"⚠️ <b>Критический инцидент #{incident.id}</b>\n"
             f"🧾 {event_log.message}\n"

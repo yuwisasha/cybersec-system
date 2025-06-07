@@ -19,33 +19,25 @@ services:
       - .env
     ports:
       - "8000:8000"
-    volumes:
-      - ./app:/app/app
-
-  # alembic:
-  #   build:
-  #     context: .
-  #   container_name: cybersec-alembic
-  #   depends_on:
-  #     - db
-  #   command: uv run alembic upgrade head
-  #   env_file:
-  #     - .env
 
   loki:
     image: grafana/loki
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/loki-config.yaml
     volumes:
-      - ./loki:/etc/loki
+      - ./loki/rules/fake:/loki/rules/fake
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml
+      - loki_data:/loki
 
   promtail:
     image: grafana/promtail
     volumes:
       - ./promtail:/etc/promtail
-      - /var/log:/var/log:ro
+      - /etc/machine-id:/etc/machine-id:ro 
+      - /var/log/journal:/var/log/journal:ro
     command: -config.file=/etc/promtail/promtail-config.yaml
+    user: root
 
   grafana:
     image: grafana/grafana
@@ -60,3 +52,4 @@ services:
 volumes:
   postgres_data:
   grafana_data:
+  loki_data:

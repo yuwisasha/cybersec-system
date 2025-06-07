@@ -1,0 +1,12 @@
+groups:
+  - name: privilege-escalation
+    rules:
+      - alert: PrivilegeEscalationAttempt
+        expr: count_over_time({job="systemd"} |= `sudo` or `root` [1m]) > 3
+        for: 30s
+        labels:
+          severity: critical
+          category: privilege
+          source_type: server
+        annotations:
+          summary: "Попытки повышения привилегий — возможный взлом"

@@ -1,0 +1,12 @@
+groups:
+  - name: file-actions
+    rules:
+      - alert: FileAccessAlert
+        expr: count_over_time({job="systemd"} |= `deleted` or `modified` [1m]) > 10
+        for: 1m
+        labels:
+          severity: medium
+          category: files
+          source_type: workstation
+        annotations:
+          summary: "Множественные действия с файлами — потенциальная угроза"
