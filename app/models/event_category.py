@@ -19,4 +19,4 @@ class EventCategory(Base):
     logs: Mapped[list["EventLog"]] = relationship(back_populates="category")
 
     def __str__(self):
-        return f"{self.name}"
+        return f"#{self.id} - {self.name}"

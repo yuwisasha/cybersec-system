@@ -15,6 +15,9 @@ scrape_configs:
       max_age: 12h            
       labels:
         job: systemd
+        source_ip: ${HOST_IP}
+        source_type: ${SOURCE_TYPE}
+        user_login: ${USER}
     relabel_configs:
       - source_labels: ['__journal__systemd_unit']
         target_label: 'unit'

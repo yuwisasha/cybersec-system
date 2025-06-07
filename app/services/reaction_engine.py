@@ -14,7 +14,6 @@ from app.models import (
     Recommendation,
 )
 from app.core.telegram import send_telegram_alert
-from app.services.incident_service import generate_incident_description
 
 
 def apply_reaction(event_log: EventLog, db: Session):
@@ -22,6 +21,7 @@ def apply_reaction(event_log: EventLog, db: Session):
         db.query(EventSource).filter_by(ip_address=event_log.source_ip).first()
     )
     if not source:
+        print(1)
         return
 
     rule = (
@@ -35,6 +35,7 @@ def apply_reaction(event_log: EventLog, db: Session):
     )
 
     if not rule:
+        print(2)
         return
 
     # Поиск открытого инцидента по совпадающим параметрам
@@ -54,6 +55,7 @@ def apply_reaction(event_log: EventLog, db: Session):
     )
 
     if existing_incident:
+        print(3)
         incident = existing_incident
         logger.info(
             f"Привязываем событие #{event_log.event_id}"
@@ -62,7 +64,7 @@ def apply_reaction(event_log: EventLog, db: Session):
     else:
         incident = Incident(
             created_at=datetime.now().date(),
-            description=generate_incident_description([event_log.event]),
+            description=event_log.message,
             status="открыт",
         )
         db.add(incident)
@@ -98,7 +100,9 @@ def apply_reaction(event_log: EventLog, db: Session):
     recomnendation = (
         db.query(Recommendation).filter_by(id=rule.recommendation_id).first()
     )
-    if severity and severity.name.lower() == "Критический":
+    if severity and severity.name.lower() == "критический":
+        print(4)
+        print("====== Telegram sending ======")
         send_telegram_alert(
             f"⚠️ <b>Критический инцидент #{incident.id}</b>\n"
             f"🧾 {event_log.message}\n"

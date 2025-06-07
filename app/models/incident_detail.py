@@ -29,4 +29,4 @@ class IncidentDetail(Base):
     )
 
     def __str__(self):
-        return f"{self.added_at} {self.comment}"
+        return f"#{self.id} {self.added_at} {self.comment}"

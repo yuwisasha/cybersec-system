@@ -26,4 +26,4 @@ class Recommendation(Base):
     )
 
     def __str__(self):
-        return f"{self.created_at} {self.content}"
+        return f"#{self.id} {self.created_at} {self.content}"

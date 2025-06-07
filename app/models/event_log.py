@@ -48,4 +48,4 @@ class EventLog(Base):
     )
 
     def __str__(self):
-        return f"{self.category_id} {self.message}"
+        return f"#{self.id} {self.user_login} {self.message}"

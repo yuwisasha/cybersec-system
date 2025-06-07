@@ -4,4 +4,16 @@ from app.models import Incident
 
 
 class IncidentAdmin(ModelView, model=Incident):
-    column_list = "__all__"
+    column_list = [
+        Incident.recommendations,
+        Incident.created_at,
+        Incident.description,
+        Incident.status,
+    ]
+    column_details_list = [
+        Incident.recommendations,
+        Incident.created_at,
+        Incident.description,
+        Incident.status,
+        Incident.breakdowns,
+    ]

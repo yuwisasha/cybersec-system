@@ -36,7 +36,11 @@ services:
       - ./promtail:/etc/promtail
       - /etc/machine-id:/etc/machine-id:ro 
       - /var/log/journal:/var/log/journal:ro
-    command: -config.file=/etc/promtail/promtail-config.yaml
+    command: -config.file=/etc/promtail/promtail-config.yaml -config.expand-env=true
+    environment:
+    - HOST_IP=localhost
+    - SOURCE_TYPE=server
+    - USER=pao
     user: root
 
   grafana:

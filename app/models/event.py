@@ -20,4 +20,4 @@ class Event(Base):
     logs: Mapped[list["EventLog"]] = relationship(back_populates="event")
 
     def __str__(self):
-        return f"{self.created_at} {self.description}"
+        return f"#{self.id} {self.created_at} {self.description}"

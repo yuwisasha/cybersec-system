@@ -2,11 +2,11 @@ groups:
   - name: auth-failures
     rules:
       - alert: TooManyAuthFailures
-        expr: count_over_time({job="systemd"} |= `authentication failure` [1m]) > 5
+        expr: 'count_over_time({job="systemd"} |= "authentication failure" [1m]) > 3'
         for: 30s
         labels:
-          severity: critical
-          category: authentication
+          severity: Критический
+          category: Аутентификация
           source_type: external
         annotations:
           summary: "Более 5 неудачных попыток входа за минуту (возможно — атака)"
