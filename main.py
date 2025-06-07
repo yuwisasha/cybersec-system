@@ -18,9 +18,10 @@ from app.admin import (
     ReactionRuleAdmin,
     SeverityLevelAdmin,
 )
+from app.admin.auth_backend import authentication_backend
 
 app = FastAPI(debug=settings.debug)
-admin = Admin(app, engine)
+admin = Admin(app, engine, authentication_backend=authentication_backend)
 
 app.include_router(ingest_router)
 app.include_router(incedents_router)
