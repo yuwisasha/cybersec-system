@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends
+from datetime import datetime
+
+from fastapi import APIRouter, Depends, Query
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
@@ -9,8 +11,12 @@ router = APIRouter()
 
 
 @router.get("/report/reactions")
-def export_reaction_report(db: Session = Depends(get_db)):
-    results = generate_incident_report(db)
+def export_reaction_report(
+    db: Session = Depends(get_db),
+    from_: datetime = Query(None, alias="from"),
+    to: datetime = Query(None),
+):
+    results = generate_incident_report(db, from_, to)
 
     return StreamingResponse(
         results,

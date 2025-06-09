@@ -1,4 +1,5 @@
 from io import BytesIO
+from datetime import datetime
 
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
@@ -14,7 +15,11 @@ from app.models import (
 )
 
 
-def generate_incident_report(db: Session) -> BytesIO:
+def generate_incident_report(
+    db: Session,
+    from_: datetime,
+    to: datetime,
+) -> BytesIO:
     wb = Workbook()
     ws = wb.active
     ws.title = "Инциденты"
@@ -35,7 +40,10 @@ def generate_incident_report(db: Session) -> BytesIO:
         for cell in col:
             cell.font = bold_font
 
-    rows = db.query(Incident).order_by(Incident.created_at.desc()).all()
+    rows = db.query(Incident).filter(
+        Incident.created_at >= from_,
+        Incident.created_at <= to,
+    ).order_by(Incident.created_at.desc()).all()
 
     for incident in rows:
         # критичность — по максимальной среди событий

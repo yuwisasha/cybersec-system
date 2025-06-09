@@ -1,8 +1,16 @@
 {% extends "sqladmin/list.html" %}
 {% block content %}
     {{ super() }}
-    <a href="/report/reactions" class="btn btn-outline ml-2">
-        📤 Экспорт в Excel
-    </a>
+    <form action="/report/reactions" method="get" class="flex items-center gap-2 mt-4">
+        <label for="from">с</label>
+        <input type="date" name="from" id="from" class="input input-sm input-bordered">
+
+        <label for="to">по</label>
+        <input type="date" name="to" id="to" class="input input-sm input-bordered">
+
+        <button type="submit" class="btn btn-outline btn-sm">
+            📄 Экспортировать отчёт
+        </button>
+    </form>
 
 {% endblock %}
