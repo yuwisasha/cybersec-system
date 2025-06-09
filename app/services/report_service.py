@@ -70,10 +70,11 @@ def generate_incident_report(db: Session) -> BytesIO:
         ws.append(row)
 
         if severity and severity[0].lower() == "критический":
-            for cell in ws[-1]:
-                cell.fill = PatternFill(
-                    start_color="FF9999", fill_type="solid"
-                )
+            for cell in ws.iter_rows(min_row=ws.max_row, max_row=ws.max_row):
+                for c in cell:
+                    c.fill = PatternFill(
+                        start_color="FF9999", fill_type="solid"
+                    )
 
     output = BytesIO()
     wb.save(output)

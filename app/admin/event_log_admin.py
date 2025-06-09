@@ -4,6 +4,7 @@ from app.models import EventLog
 
 
 class EventLogAdmin(ModelView, model=EventLog):
+    name_plural = "Журнал событий"
     column_list = [
         EventLog.event,
         EventLog.user,
@@ -19,3 +20,4 @@ class EventLogAdmin(ModelView, model=EventLog):
         EventLog.source_ip,
     ]
     column_details_list = column_list
+    can_export = False

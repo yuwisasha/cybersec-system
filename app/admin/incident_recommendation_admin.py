@@ -4,6 +4,7 @@ from app.models import IncidentRecommendation
 
 
 class IncidentRecommendationAdmin(ModelView, model=IncidentRecommendation):
+    name_plural = "Рекомендации к инцидентам"
     column_list = [
         IncidentRecommendation.incident,
         IncidentRecommendation.recommendation,
@@ -11,3 +12,4 @@ class IncidentRecommendationAdmin(ModelView, model=IncidentRecommendation):
         IncidentRecommendation.status,
     ]
     column_details_list = column_list
+    list_template = "sqladmin/custom_list.html"

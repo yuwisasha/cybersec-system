@@ -4,6 +4,7 @@ from app.models import SeverityLevel
 
 
 class SeverityLevelAdmin(ModelView, model=SeverityLevel):
+    name_plural = "Уровни критичности"
     column_list = [
         SeverityLevel.rules,
         SeverityLevel.name,
@@ -15,3 +16,4 @@ class SeverityLevelAdmin(ModelView, model=SeverityLevel):
         SeverityLevel.explanation,
         SeverityLevel.logs,
     ]
+    can_export = False

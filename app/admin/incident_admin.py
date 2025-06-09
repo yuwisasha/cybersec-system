@@ -4,6 +4,7 @@ from app.models import Incident
 
 
 class IncidentAdmin(ModelView, model=Incident):
+    name_plural = "Инциденты"
     column_list = [
         Incident.recommendations,
         Incident.created_at,
@@ -17,3 +18,4 @@ class IncidentAdmin(ModelView, model=Incident):
         Incident.status,
         Incident.breakdowns,
     ]
+    can_export = False

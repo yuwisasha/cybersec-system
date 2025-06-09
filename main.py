@@ -9,6 +9,7 @@ from app.routers import (
     recommendations_router,
     events_router,
     auth_router,
+    report_router,
 )
 from app.admin import (
     UserAdmin,
@@ -17,6 +18,7 @@ from app.admin import (
     IncidentAdmin,
     ReactionRuleAdmin,
     SeverityLevelAdmin,
+    RecommendationAdmin,
 )
 from app.admin.auth_backend import authentication_backend
 
@@ -28,6 +30,7 @@ app.include_router(incedents_router)
 app.include_router(recommendations_router)
 app.include_router(events_router)
 app.include_router(auth_router)
+app.include_router(report_router)
 
 admin.add_model_view(UserAdmin)
 admin.add_model_view(EventLogAdmin)
@@ -35,3 +38,4 @@ admin.add_model_view(IncidentRecommendationAdmin)
 admin.add_model_view(IncidentAdmin)
 admin.add_model_view(ReactionRuleAdmin)
 admin.add_model_view(SeverityLevelAdmin)
+admin.add_model_view(RecommendationAdmin)

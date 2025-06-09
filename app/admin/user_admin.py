@@ -4,6 +4,7 @@ from app.models import User
 
 
 class UserAdmin(ModelView, model=User):
+    name_plural = "Пользователи"
     column_list = [
         User.login,
         User.last_name,
@@ -18,3 +19,4 @@ class UserAdmin(ModelView, model=User):
         User.middle_name,
     ]
     column_details_list = column_list
+    can_export = False

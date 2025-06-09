@@ -1,0 +1,8 @@
+{% extends "sqladmin/list.html" %}
+{% block content %}
+    {{ super() }}
+    <a href="/report/reactions" class="btn btn-outline ml-2">
+        📤 Экспорт в Excel
+    </a>
+
+{% endblock %}
